@@ -1492,7 +1492,7 @@
 						el.style.cssText = 'position:absolute;visibility:hidden;';
 						document.body.appendChild(el);
 						supported = (el.value !== ':)');
-						document.body.removeChild(el);
+						document.body.removeChild(el);^
 						return supported;
 					}
 				},
@@ -1893,7 +1893,11 @@
 				poly = typeof options.poly !== 'undefined' ? options.poly : [],
 				checkdom = typeof options.checkdom !== 'undefined' ? options.checkdom : false,
 				polycheckdom = typeof options.polycheckdom !== 'undefined' ? options.polycheckdom : false,
-				wetboew = checkdom ? $('[class^="wet-boew-"]') : $(),
+				wetboew = checkdom ?
+					$('[class*="wet-boew-"]').filter(function() {  
+						return((' ' + this.className + ' ').match(/\swet-boew-[^\s]+\s/) != null);
+					}) :
+					$(),
 				time = (new Date()).getTime(),
 				event_polyinit = 'wb-polyinit-loaded-' + time,
 				event_pcalldeps = 'wb-pcalldeps-loaded-' + time,
